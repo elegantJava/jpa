@@ -21,7 +21,7 @@ public class StudentServiceImpl {
     private final StudentRepository repository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository repository){
+    private StudentServiceImpl(StudentRepository repository){
         this.repository = repository;
     }
 

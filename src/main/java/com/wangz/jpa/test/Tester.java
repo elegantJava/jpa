@@ -24,8 +24,12 @@ import java.util.List;
 @RequestMapping("/test")
 public class Tester {
 
+    private final StudentServiceImpl service;
+
     @Autowired
-    private StudentServiceImpl service;
+    private Tester(StudentServiceImpl service){
+        this.service = service;
+    }
     @GetMapping
     public String test(){
         return service.test().toString();
