@@ -1,5 +1,7 @@
 package com.wangz.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wangz.jpa.dao.mybatis.basic.IgnoreField;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,5 +20,7 @@ public class Student {
     private Integer id;
     private String name;
     private String gender;
+    @JsonIgnore
+    private String password;
     private Integer age;
 }

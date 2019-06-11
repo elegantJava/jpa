@@ -1,5 +1,6 @@
 package com.wangz.jpa.dao.mybatis.basic;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.CaseFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
@@ -96,18 +97,19 @@ public class SqlAssembler {
 
                     // getter
                     if (propertyDescriptor.getReadMethod() != null &&
-                            propertyDescriptor.getReadMethod().getAnnotation(IgnoreField.class) != null) {
+                            propertyDescriptor.getReadMethod().getAnnotation(JsonIgnore.class) != null) {
                         continue;
                     }
 
                     // setter
                     if (propertyDescriptor.getWriteMethod() != null &&
-                            propertyDescriptor.getWriteMethod().getAnnotation(IgnoreField.class) != null) {
+                            propertyDescriptor.getWriteMethod().getAnnotation(JsonIgnore.class) != null) {
                         continue;
                     }
 
                     Field field = findField(fields, name);
-                    if (field != null && field.getAnnotation(IgnoreField.class) != null) {
+                    // 当前字段是否被 JsonIgnore 注解
+                    if (field != null && field.getAnnotation(JsonIgnore.class) != null) {
                         continue;
                     }
 

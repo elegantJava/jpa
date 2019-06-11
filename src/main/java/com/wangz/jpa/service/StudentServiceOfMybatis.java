@@ -41,6 +41,7 @@ public class StudentServiceOfMybatis {
         Student student = new Student();
         student.setAge(123);
         student.setName("test_update");
+        student.setPassword("jksdlf");
         Student byId = studentDao.findById(2);
         UpdateTool.copyNullProperties(byId,student);
         studentDao.update(student);

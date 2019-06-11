@@ -2,10 +2,8 @@ package com.wangz.jpa.dao.mybatis.basic;
 
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.builder.annotation.ProviderContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 
 public interface BaseDao<T> {
@@ -24,13 +22,9 @@ public interface BaseDao<T> {
     @InsertProvider(type = BaseDaoProvider.class, method = "insert")
     void insert(T entity);
 
-
     @UpdateProvider(type = BaseDaoProvider.class, method = "update")
     @Options(useGeneratedKeys = true, keyColumn = primaryKey)
     void update(T entity);
-
-    @UpdateProvider(type = BaseDaoProvider.class, method = "updateByAnnotation")
-    void updateByAnnotation(T entity, Class<? extends Annotation> updateAnnotation);
 
     @DeleteProvider(type = BaseDaoProvider.class, method = "deleteByPrimaryKey")
     @Options(useGeneratedKeys = true, keyColumn = primaryKey)
@@ -68,11 +62,6 @@ public interface BaseDao<T> {
         public String update(ProviderContext providerContext) {
             Class entityClass = this.getMapperType(providerContext);
             return SqlAssembler.from(entityClass).updateSQL();
-        }
-
-        public String updateByAnnotation(Object entity, Class<? extends Annotation> updateAnnotation, ProviderContext providerContext) {
-            Class entityClass = getMapperType(providerContext);
-            return EntitySQL.from(entityClass).updateByAnnotationSQL(updateAnnotation, "param1.");
         }
 
         public String deleteByPrimaryKey(ProviderContext providerContext) {
