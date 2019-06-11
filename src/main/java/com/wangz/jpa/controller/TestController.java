@@ -1,18 +1,11 @@
-package com.wangz.jpa.test;
+package com.wangz.jpa.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.wangz.jpa.common.Criteria;
-import com.wangz.jpa.common.Restrictions;
-import com.wangz.jpa.model.Student;
-import com.wangz.jpa.repository.StudentRepository;
 import com.wangz.jpa.service.StudentServiceImpl;
+import com.wangz.jpa.service.StudentServiceOfMybatis;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @ClassName Tester
@@ -22,16 +15,23 @@ import java.util.List;
  */
 @RestController()
 @RequestMapping("/test")
-public class Tester {
+public class TestController {
 
     private final StudentServiceImpl service;
-
+    private final StudentServiceOfMybatis serviceOfMybatis;
     @Autowired
-    private Tester(StudentServiceImpl service){
+    private TestController(StudentServiceImpl service,StudentServiceOfMybatis serviceOfMybatis){
         this.service = service;
+        this.serviceOfMybatis = serviceOfMybatis;
     }
     @GetMapping
     public String test(){
         return service.test().toString();
     }
+
+    @GetMapping("/testGet")
+    public String testGet(){
+        return serviceOfMybatis.testGet();
+    }
+
 }

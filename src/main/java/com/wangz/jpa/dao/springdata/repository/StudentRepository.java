@@ -1,4 +1,4 @@
-package com.wangz.jpa.repository;
+package com.wangz.jpa.dao.springdata.repository;
 
 import com.wangz.jpa.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;

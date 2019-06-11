@@ -1,10 +1,10 @@
 package com.wangz.jpa.service;
 
 import com.alibaba.fastjson.JSON;
-import com.wangz.jpa.common.Criteria;
-import com.wangz.jpa.common.Restrictions;
+import com.wangz.jpa.dao.springdata.basic.Criteria;
+import com.wangz.jpa.dao.springdata.basic.Restrictions;
+import com.wangz.jpa.dao.springdata.repository.StudentRepository;
 import com.wangz.jpa.model.Student;
-import com.wangz.jpa.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +18,17 @@ import java.util.List;
  */
 @Service
 public class StudentServiceImpl {
-    private final StudentRepository repository;
 
+    private final StudentRepository repository;
     @Autowired
     private StudentServiceImpl(StudentRepository repository){
         this.repository = repository;
     }
 
-
+    /**
+     * spring data
+     * @return
+     */
     public Object test(){
         Criteria<Student> criteria = new Criteria<>();
         criteria
@@ -35,4 +38,5 @@ public class StudentServiceImpl {
         List<Student> list = repository.findAll(criteria);
         return JSON.toJSON(list);
     }
+
 }

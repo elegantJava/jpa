@@ -1,4 +1,4 @@
-package com.wangz.jpa.common;
+package com.wangz.jpa.dao.springdata.basic;
 
 import lombok.Data;
 import org.springframework.util.StringUtils;

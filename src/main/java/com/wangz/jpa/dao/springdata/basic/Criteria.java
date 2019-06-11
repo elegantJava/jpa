@@ -1,4 +1,4 @@
-package com.wangz.jpa.common;
+package com.wangz.jpa.dao.springdata.basic;
 
 /**
  * @ClassName Criteria
