@@ -6,16 +6,16 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
- * @ClassName Student
+ * @ClassName User
  * @Auther: wz1016_vip@163.com
- * @Date: 2019/6/9 17:46
+ * @Date: 2019/6/11 16:36
  * @Description: TODO
  */
 @Data
-@Table(name="student")
-@Entity
-public class Student {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name="user")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String gender;

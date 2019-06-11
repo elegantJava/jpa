@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -97,19 +98,25 @@ public class SqlAssembler {
 
                     // getter
                     if (propertyDescriptor.getReadMethod() != null &&
-                            propertyDescriptor.getReadMethod().getAnnotation(JsonIgnore.class) != null) {
+                            (propertyDescriptor.getReadMethod().getAnnotation(JsonIgnore.class) != null
+                                    || propertyDescriptor.getReadMethod().getAnnotation(Transient.class) != null)
+                    ) {
                         continue;
                     }
 
                     // setter
                     if (propertyDescriptor.getWriteMethod() != null &&
-                            propertyDescriptor.getWriteMethod().getAnnotation(JsonIgnore.class) != null) {
+                            (propertyDescriptor.getReadMethod().getAnnotation(JsonIgnore.class) != null
+                                    || propertyDescriptor.getReadMethod().getAnnotation(Transient.class) != null)
+                    ) {
                         continue;
                     }
 
                     Field field = findField(fields, name);
-                    // 当前字段是否被 JsonIgnore 注解
-                    if (field != null && field.getAnnotation(JsonIgnore.class) != null) {
+                    // 当前字段是否被 JsonIgnore || Transient 注解
+                    if (field != null &&
+                            (field.getAnnotation(JsonIgnore.class) != null
+                                    || field.getAnnotation(Transient.class) != null)) {
                         continue;
                     }
 
@@ -154,6 +161,25 @@ public class SqlAssembler {
     //                          开始组装sql
     //======================================================================
 
+
+//    public String listSQL() {
+//        SQL sql = new SQL();
+//
+//        // select ...
+//        List<String> persistPropertyNames = getPersistPropertyNames();
+//        persistPropertyNames.forEach(col->{
+//            String name = String.format("%s", col);
+//            sql.SELECT(upperCamelToLowerUnderscore(name));
+//        });
+//
+//        // from tableName
+//        String tableName = this.tableName();
+//        sql.FROM(tableName);
+//
+//        // where id = #{id}
+//        sql.WHERE("id = #{id}");
+//        return sql.toString();
+//    }
 
     public String queryByPrimaryKeySQL() {
         SQL sql = new SQL();

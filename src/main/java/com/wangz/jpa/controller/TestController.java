@@ -1,5 +1,6 @@
 package com.wangz.jpa.controller;
 
+import com.wangz.jpa.dao.mybatis.Service.UserService;
 import com.wangz.jpa.model.Student;
 import com.wangz.jpa.service.StudentServiceImpl;
 import com.wangz.jpa.service.StudentServiceOfMybatis;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final StudentServiceImpl service;
+    @Autowired
+    private UserService userService;
     private final StudentServiceOfMybatis serviceOfMybatis;
     @Autowired
     public TestController(StudentServiceImpl service,StudentServiceOfMybatis serviceOfMybatis){
@@ -27,7 +30,7 @@ public class TestController {
     }
     @GetMapping
     public String test(){
-        return service.test().toString();
+        return userService.select();
     }
 
     @GetMapping("/test1")

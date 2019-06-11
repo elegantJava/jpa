@@ -7,6 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * @ClassName StudentServiceOfMybatis
@@ -45,6 +48,7 @@ public class StudentServiceOfMybatis {
         Student byId = studentDao.findById(2);
         UpdateTool.copyNullProperties(byId,student);
         studentDao.update(student);
+
         return "up ok";
     }
 }
