@@ -20,7 +20,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
 #我们配置公共的这个类不要放在全局可以扫描的mapper下，不然会报错
-mapper:
-  mappers: com.wangz.jpa.dao.mybatis.basic.BaseMapper
-  identity: MYSQL
+#mapper:
+#  mappers: com.wangz.jpa.dao.basemapper.basic.BaseMapper
+#  identity: MYSQL
 

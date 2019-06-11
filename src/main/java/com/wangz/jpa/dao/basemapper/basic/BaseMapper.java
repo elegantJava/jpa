@@ -1,4 +1,4 @@
-package com.wangz.jpa.dao.mybatis.basic;
+package com.wangz.jpa.dao.basemapper.basic;
 
 import tk.mybatis.mapper.common.*;
 

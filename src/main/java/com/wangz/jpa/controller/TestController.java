@@ -1,7 +1,6 @@
 package com.wangz.jpa.controller;
 
-import com.wangz.jpa.dao.mybatis.Service.UserService;
-import com.wangz.jpa.model.Student;
+import com.wangz.jpa.dao.basemapper.Service.UserService;
 import com.wangz.jpa.service.StudentServiceImpl;
 import com.wangz.jpa.service.StudentServiceOfMybatis;
 import org.springframework.beans.factory.annotation.Autowired;
