@@ -69,13 +69,7 @@
         </dependency>
 
         <!--两者选一-->
-        <!--mybatis-->
-        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis</groupId>-->
-<!--            <artifactId>mybatis</artifactId>-->
-<!--            <version>3.5.0</version>-->
-<!--        </dependency>-->
+
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
