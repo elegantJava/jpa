@@ -2,6 +2,7 @@ package com.wangz.jpa.dao.mybatis.basic;
 
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.builder.annotation.ProviderContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -15,13 +16,18 @@ public interface BaseDao<T> {
     @Options(useGeneratedKeys = true, keyColumn = primaryKey)
     T queryByPrimaryKey(Serializable id);
 
-    @InsertProvider(type = BaseDaoProvider.class, method = "insert")
-    T insert(T entity);
-
-
-    @UpdateProvider(type = BaseDaoProvider.class, method = "updateByPrimaryKey")
+    @SelectProvider(type = BaseDaoProvider.class, method = "queryByPrimaryKey")
     @Options(useGeneratedKeys = true, keyColumn = primaryKey)
-    void updateByPrimaryKey(Serializable id);
+    T findById(Serializable id);
+
+
+    @InsertProvider(type = BaseDaoProvider.class, method = "insert")
+    void insert(T entity);
+
+
+    @UpdateProvider(type = BaseDaoProvider.class, method = "update")
+    @Options(useGeneratedKeys = true, keyColumn = primaryKey)
+    void update(T entity);
 
     @UpdateProvider(type = BaseDaoProvider.class, method = "updateByAnnotation")
     void updateByAnnotation(T entity, Class<? extends Annotation> updateAnnotation);
@@ -59,9 +65,14 @@ public interface BaseDao<T> {
             return SqlAssembler.from(entityClass).insertSQL();
         }
 
-        public String updateByPrimaryKey(ProviderContext providerContext) {
+        public String update(ProviderContext providerContext) {
             Class entityClass = this.getMapperType(providerContext);
-            return SqlAssembler.from(entityClass).updateByPrimaryKeySQL();
+            return SqlAssembler.from(entityClass).updateSQL();
+        }
+
+        public String updateByAnnotation(Object entity, Class<? extends Annotation> updateAnnotation, ProviderContext providerContext) {
+            Class entityClass = getMapperType(providerContext);
+            return EntitySQL.from(entityClass).updateByAnnotationSQL(updateAnnotation, "param1.");
         }
 
         public String deleteByPrimaryKey(ProviderContext providerContext) {

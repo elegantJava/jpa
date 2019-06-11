@@ -190,7 +190,7 @@ public class SqlAssembler {
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySQL() {
+    public String updateSQL() {
         SQL sql = new SQL();
         String tableName = this.tableName();
         sql.UPDATE(tableName);
@@ -198,11 +198,10 @@ public class SqlAssembler {
         persistPropertyNames.forEach(col->{
             String name = String.format("%s", col);
             if (name.equals("id")) return;
-            sql.SET(upperCamelToLowerUnderscore(name), String.format("#{%s}", col));
+            sql.SET(String.format("%s = #{%s}", upperCamelToLowerUnderscore(name), col));
         });
 
-        sql.WHERE("1=1").AND()
-                .WHERE("id = #{id}");
+        sql.WHERE("1=1").AND().WHERE("id = #{id}");
 
         return sql.toString();
     }

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan({"com.wangz.jpa.dao.mybatis.dao"})
+//@MapperScan({"com.wangz.jpa.dao.mybatis.dao"})
 public class JpaApplication {
 
     public static void main(String[] args) {
